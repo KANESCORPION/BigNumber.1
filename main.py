@@ -106,13 +106,15 @@ if __name__ == "__main__":
         addition_result = add_large_numbers(num1, num2)
         print(f"Sum: {addition_result}")
 
-        # Subtracting the two numbers
-        try:
-            subtraction_result = add_large_numbers(num1,
-                                                   '-' + num2)  # num1 - num2 as add_large_numbers can handle signs
-            print(f"Difference: {subtraction_result}")
-        except ValueError as e:
-            print(e)
+        # Subtracting the two numbers (num1 - num2)
+        if num2[0] == '-':
+            # If num2 is negative, we actually add its absolute value
+            subtraction_result = add_large_numbers(num1, num2.lstrip('-'))
+        else:
+            # If num2 is positive, we subtract
+            subtraction_result = add_large_numbers(num1, '-' + num2)
+
+        print(f"Difference: {subtraction_result}")
 
         # Left and right shift for both numbers
         positions = int(input("Enter the number of positions to shift: "))
